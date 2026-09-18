@@ -1,0 +1,16 @@
+services:
+  litellm:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - litellm-postgres
+      - litellm-valkey
+    environment:
+      DATABASE_URL: postgresql://USER:PASSWORD@litellm-postgres:5432/defaultdb
+      VALKEY_URL: redis://USER:PASSWORD@litellm-valkey:6379/0
+      # Add master/salt keys, UI credentials and AIVEN_CA_CERT_BASE64 in Runtime.
+  litellm-postgres:
+    image: postgres:16
+  litellm-valkey:
+    image: valkey/valkey:8
