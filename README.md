@@ -52,7 +52,7 @@ For MCP/API deployment, build the root Dockerfile and create the two `applicatio
 | PostgreSQL | `startup-4` or equivalent 4 GiB plan | Dedicated application database; conservative starting point |
 | Valkey | Smallest available plan with at least 1 GiB RAM | Shared state, with response caching disabled |
 
-These are estimates, not benchmarked minimums or production recommendations. Plans are selected in Console/API, not enforced by this Compose file. Check available internal/free plans and displayed pricing before creating services. See [VALIDATION.md](VALIDATION.md) for test status.
+These starting sizes passed the small live demo test described in VALIDATION.md. They are not benchmarked minimums or production recommendations. Plans are selected in Console/API, not enforced by this Compose file. Check available internal/free plans and displayed pricing before creating services. See [VALIDATION.md](VALIDATION.md) for test status.
 
 ### Runtime variables
 
