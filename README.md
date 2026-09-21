@@ -102,3 +102,8 @@ This is a single-replica demo. Database migrations run at startup using LiteLLM'
 - [LiteLLM configuration](https://docs.litellm.ai/docs/proxy/config_settings)
 - [Pinned LiteLLM release](https://github.com/BerriAI/litellm/releases/tag/v1.101.0)
 - [Aiven Runtime Compose manifests](https://aiven.io/docs/products/runtime/manifest-files/compose-files)
+
+## License
+
+The template code in this repository is licensed under the [MIT License](LICENSE).
+Third-party applications, dependencies and container images retain their own licenses.
