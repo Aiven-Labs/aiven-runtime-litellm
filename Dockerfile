@@ -1,4 +1,4 @@
-FROM ghcr.io/berriai/litellm:v1.101.0@sha256:d295634e09c648dcdb72c4cc2dd226f5fb87823a73e88cbbed6f205e4deb044b
+FROM ghcr.io/berriai/litellm:v1.106.2@sha256:7294b90f868c5c38c99b83021c7ba46f9b439e95f8e32964c925c7d2563a03f7
 
 COPY bootstrap.py /starter/bootstrap.py
 ENV PYTHONUNBUFFERED=1

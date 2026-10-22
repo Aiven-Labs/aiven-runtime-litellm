@@ -2,7 +2,7 @@
 
 A standalone **LiteLLM AI Gateway and Admin UI** with **Aiven for PostgreSQL** and **Aiven for Valkey**. Bring your own model-provider credentials and expose them through an OpenAI-compatible API with virtual keys, budgets and usage tracking.
 
-The application image is pinned to LiteLLM **v1.101.0**, including its registry digest. No model provider is configured and no model calls are made automatically.
+The application image is pinned to LiteLLM **v1.106.2**, including its registry digest. No model provider is configured and no model calls are made automatically.
 
 ## Architecture
 
@@ -95,12 +95,20 @@ The Docker health check calls `/health/liveliness`; this only proves the proxy i
 
 This is a single-replica demo. Database migrations run at startup using LiteLLM's v2 migration resolver and fail startup on migration errors. Before scaling out, move migrations into a controlled deployment step and configure connection limits, rate limits, retention, monitoring and failure handling. Back up before upgrades and do not downgrade a migrated database. The image inherits the upstream runtime user and dependencies; review hardening for your production environment.
 
+## Security and upgrades
+
+The previous v1.101.0 image is affected by [GHSA-7hp6-4w63-5g45](https://github.com/BerriAI/litellm/security/advisories/GHSA-7hp6-4w63-5g45), which allows an authenticated internal user to gain administrator access and execute code. This template now pins v1.106.2, which is outside the affected version ranges.
+
+The separate [21 October 2026 supply-chain incident](https://docs.litellm.ai/blog/security-incident-oct-21-2026) affected v1.107.0 and moving image tags. The original v1.101.0 digest was not among the affected artifacts. The replacement follows LiteLLM's recommendation to pin v1.106.2; keep the digest pin and avoid moving tags such as `latest` or `main-stable`.
+
+Existing deployments need a rebuild and redeployment from the updated Dockerfile. First back up PostgreSQL and preserve the existing salt key. Then check migrations, Admin UI login, model/key persistence and an authenticated request. The updated image has not yet been tested on Aiven Runtime; see [VALIDATION.md](VALIDATION.md) for the checks completed so far. This is an assessment of these published advisories, not a guarantee against other vulnerabilities.
+
 ## References
 
 - [LiteLLM deployment](https://docs.litellm.ai/docs/proxy/deploy)
 - [LiteLLM Admin UI and account setup](https://docs.litellm.ai/docs/proxy/ui)
 - [LiteLLM configuration](https://docs.litellm.ai/docs/proxy/config_settings)
-- [Pinned LiteLLM release](https://github.com/BerriAI/litellm/releases/tag/v1.101.0)
+- [Pinned LiteLLM release](https://github.com/BerriAI/litellm/releases/tag/v1.106.2)
 - [Aiven Runtime Compose manifests](https://aiven.io/docs/products/runtime/manifest-files/compose-files)
 
 ## License
